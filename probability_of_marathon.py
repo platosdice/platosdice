@@ -5,37 +5,37 @@ from random import randint
 
 import datetime
 import time
+start_time = time.time()
 
 
-# now = time.strftime("%c")
-## date and time representation
-print "Date:  " + time.strftime("%c")
-
-
-dices = {1: 4, 2: 6, 3: 8, 4: 10, 5: 12, 6: 20}
+dices = {1: 4, 2: 6, 3: 8, 4: 12, 5: 20}
 
 # just loop outside loop incr. by 10, no need for array / list etc.
-tendices = {10, 20, 30, 40, 50, 60, 70, 80, 90}
-
+# tendices = {10, 20, 30, 40, 50, 60, 70, 80, 90}
 
 def die(ns):
-    # print 'hello'
     # more on % and formatting https://docs.python.org/2/tutorial/inputoutput.html
-
     for dice in dices:
-       	print '%02d) %02d sided die' % (dice, dices[dice])
-        # print '{0} and {1}'.format(4, 'eggs')
-        # use = input('\n>>> ')
         num = randint(1, ns)
     return num
-     #return num
 
-die(20)
-
-# no work random.seed()
-
-
+# ??? no work random.seed()
 # ??? Put in rolling the raven
+
+#  for dividing line
+div_line = '- ' * 48
+
+
+# Number of throws
+throws = 1000
+# - - - - - -
+
+
+alldice = ''
+highroll = 0
+total = 0
+product = 1
+
 
 marathon10 = 0
 marathon20 = 0
@@ -46,19 +46,83 @@ marathon60 = 0
 marathon70 = 0
 marathon80 = 0
 marathon90 = 0
-marathon9080 = 0
 
 count = 0
 
-throws = 10000
-
-print '\nD&D Dice Roller: throws = ' + str(throws)
-
+print div_line
+print time.strftime("%c") + ' ** Based on [' + '{:,}'.format(throws) + '] throws of all 5 Platonic Dice.'
+print div_line
 
 
 while count < throws:
-  #  print ' Roll # ' + str(count)
-    print 'abc\n'
+
+    alldice = ''
+    product = 1
+    total = 0
+    count += 1  # This is the same as count = count + 1
+
+    roll_string =''
+
+
+    for dice in dices:
+        alldice = ''
+        n = die(dices[dice])
+        total = total + n
+        product = product * n
+        # This is HOW you can print out the number like 01) then the dice
+        print '%2d) %02d sided dice' % (dice, dices[dice]) + '     showing: ' + str(n) + '  product: ' + '  total: ' + str([total])
+
+        # prints one per line print '%dd: ' % (dices[dice]) + str(n)
+        roll_string = roll_string + '%dd: ' % (dices[dice]) + str(n)
+
+
+    print  '                  total: ' + str([total]) + '  product:     ' + str([product])
+
+    print div_line
+    print roll_string
+    print div_line
+
+    if product <= 90:
+        print '***                                                   Marathon 90 ***  occured, product total dice = ' + str(total)
+        marathon90 =  marathon90 + 1
+
+#p = '{:.2%}'
+
+print '\npercent for < 90 = ' + '{:.2%}'.format(float(marathon90)/float(throws))
+print div_line
+
+# This is way better, easy to adust, shorter, ??? Fix all
+#percent = float(marathon90) / float(throws) * 100
+#print '\npercent for < 90 = ' + p.format(float(marathon90) / float(throws))
+
+
+
+
+
+
+
+
+# percent = float(marathon90) / float(throws) * 100
+# print '\npercent for < 90 = ' +  str(float(marathon90) / float(throws) * 100) + ' % \n'
+
+count= 0
+alldice = ''
+highroll = 0
+total = 0
+product = 1
+
+marathon10 = 0
+marathon20 = 0
+marathon30 = 0
+marathon40 = 0
+marathon50 = 0
+marathon60 = 0
+marathon70 = 0
+marathon80 = 0
+marathon90 = 0
+
+
+while count < throws:
 
     alldice = ''
     count += 1  # This is the same as count = count + 1
@@ -66,7 +130,6 @@ while count < throws:
     highroll = 0
 
     total = 0
-    # ns = 20
     product = 1
 
     n = die(4)
@@ -96,19 +159,18 @@ while count < throws:
     product = product * n
     alldice = alldice + ' d20: ' + str(n)
 
-
     print  ' > Roll # ' + str(count) + alldice + ' Sum=  ' + str(total) + ' Product =  ' + str(product)
 
-   # print ' ==== \nTotal ' + str(total)
+
+
+
+
+    # print ' ==== \nTotal ' + str(total)
 
    # print ' ==== \nProduct (all dice multiplied) =  ' + str(product)
 
    #  print ' ==== \nMax Product ' + str(20 * 12 * 8 * 6 * 4 * 3)
 
-
-    if (product > 80) and (product <= 90):
-        print '***                                                   Marathon >70 < 100 ***  occured, product total dice = ' + str(total)
-        marathon9080 =  marathon9080 + 1
 
 
     if product <= 90:
@@ -151,6 +213,8 @@ while count < throws:
         marathon10 = marathon10 + 1
 
 
+# percent = float(marathon90) / float(throws) * 100
+# print '\npercent for < 90 = ' +  str(float(marathon90) / float(throws) * 100) + ' %'
 
 print '\n Based on ' + '{:,}'.format(throws) + ' throws of all 5 Platonic Dice:'
 
@@ -162,8 +226,6 @@ p = '{:.2%}'
 
 # This is way better, easy to adust, shorter, ??? Fix all
 
-percent = float(marathon9080) / float(throws) * 100
-print '\npercent for < 90 or 80 ^^^^^ = ' + p.format(float(marathon90) / float(throws))
 
 
 percent = float(marathon90) / float(throws) * 100
@@ -205,6 +267,7 @@ print '\npercent for < 10 = ' +  str(float(marathon10) / float(throws) * 100) + 
 
 
 
-#print ' ==== \n **Marathon occured < 90 : ' + str(marathon90) + ' Percentage: ' + str((marathon90 / throws) * 100 ) + ' precent '
-
-#print ' ==== \n **Marathon occured < 10 : ' + str(marathon10)
+print div_line
+#  how long does it take to run ---------------
+print("Plato's Dice Game Simulation took: %.5f seconds" % (time.time() - start_time))
+print div_line
