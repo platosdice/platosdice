@@ -10,6 +10,9 @@ start_time = time.time()
 
 dices = {1: 4, 2: 6, 3: 8, 4: 12, 5: 20}
 
+target_dice = [00,10, 20, 30, 40,50,60,70,80,90]
+# print 'target_dice= ' +  str(target_dice[3])
+
 # just loop outside loop incr. by 10, no need for array / list etc.
 # tendices = {10, 20, 30, 40, 50, 60, 70, 80, 90}
 
@@ -23,11 +26,11 @@ def die(ns):
 # ??? Put in rolling the raven
 
 #  for dividing line
-div_line = '- ' * 48
+div_line = '-' * 14
 
 
 # Number of throws
-throws = 1000
+throws = 10
 # - - - - - -
 
 
@@ -47,6 +50,8 @@ marathon70 = 0
 marathon80 = 0
 marathon90 = 0
 
+
+
 count = 0
 
 print div_line
@@ -60,8 +65,9 @@ while count < throws:
     product = 1
     total = 0
     count += 1  # This is the same as count = count + 1
+    marathon_detected = ""
 
-    roll_string =''
+    roll_string = str(count) + ' Summary: '
 
 
     for dice in dices:
@@ -70,25 +76,28 @@ while count < throws:
         total = total + n
         product = product * n
         # This is HOW you can print out the number like 01) then the dice
-        print '%2d) %02d sided dice' % (dice, dices[dice]) + '     showing: ' + str(n) + '  product: ' + '  total: ' + str([total])
-
-        # prints one per line print '%dd: ' % (dices[dice]) + str(n)
-        roll_string = roll_string + '%dd: ' % (dices[dice]) + str(n)
+        # print '%2d) %02d sided dice' % (dice, dices[dice]) + '     showing: ' + str(n) + '  product: ' + '  total: ' + str([total])
 
 
-    print  '                  total: ' + str([total]) + '  product:     ' + str([product])
+        # print '%dd' % (dices[dice]) + ':' +  str(n)
+        roll_string = roll_string + '%dd' % (dices[dice]) + ':' +  str(n) + ' '
 
-    print div_line
-    print roll_string
-    print div_line
+    # print div_line
 
     if product <= 90:
-        print '***                                                   Marathon 90 ***  occured, product total dice = ' + str(total)
+        # print '***                                                   Marathon 90 ***  occured, product total dice = ' + str(total)
+        marathon_detected = ' * Marathon detected < 90 '
         marathon90 =  marathon90 + 1
+
+    print roll_string + ' ( total: ' + str([total]) + '   product:   ' + str([product]) +')' + marathon_detected
 
 #p = '{:.2%}'
 
-print '\npercent for < 90 = ' + '{:.2%}'.format(float(marathon90)/float(throws))
+print div_line
+
+print 'Percent for < 90 = ' + '{:.2%}'.format(float(marathon90)/float(throws))
+# print div_line
+
 print div_line
 
 # This is way better, easy to adust, shorter, ??? Fix all
@@ -269,5 +278,5 @@ print '\npercent for < 10 = ' +  str(float(marathon10) / float(throws) * 100) + 
 
 print div_line
 #  how long does it take to run ---------------
-print("Plato's Dice Game Simulation took: %.5f seconds" % (time.time() - start_time))
+print('Plato\'s Dice Game Simulation Rolls: ' + '{:,}'.format(throws) +'.  Executed in: %.5f seconds' % (time.time() - start_time))
 print div_line
