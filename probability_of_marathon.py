@@ -5,6 +5,8 @@ from random import randint
 
 import datetime
 import time
+
+# timer for duration, see bottom of code
 start_time = time.time()
 
 
@@ -30,7 +32,7 @@ div_line = '-' * 14
 
 
 # Number of throws
-throws = 10
+throws = 1000
 # - - - - - -
 
 
@@ -85,9 +87,68 @@ while count < throws:
     # print div_line
 
     if product <= 90:
-        # print '***                                                   Marathon 90 ***  occured, product total dice = ' + str(total)
-        marathon_detected = ' * Marathon detected < 90 '
-        marathon90 =  marathon90 + 1
+        marathon90 = marathon90 + 1
+        marathon_detected = ' * Marathon detected <= 90 '
+
+    if product <= 80:
+        marathon80 = marathon80 + 1
+        marathon_detected = ' * Marathon detected < =80  +++++++++++ '
+
+    if product <= 70:
+        marathon_detected = ' * Marathon detected <= 90 '
+
+    if product <= 80:
+        marathon_detected = ' * Marathon detected <= 70  +++++++++++ '
+
+
+    if product <= 60:
+        marathon_detected = ' * Marathon detected <= 60 '
+
+    if product <= 50:
+        marathon_detected = ' * Marathon detected <= 50  +++++++++++ '
+
+
+    if product <= 40:
+        marathon_detected = ' * Marathon detected <= 40 '
+
+    if product <= 30:
+        marathon_detected = ' * Marathon detected <= 30  +++++++++++ '
+
+
+    if product <= 20:
+        marathon_detected = ' * Marathon detected <= 20 '
+
+    if product <= 10:
+        marathon_detected = ' * Marathon detected <= 10  +++++++++++ '
+
+
+
+
+    #
+    #
+    # if product <= 90:
+    #     # print '***                                                   Marathon 90 ***  occured, product total dice = ' + str(total)
+    #     marathon_detected = ' * Marathon detected < 90 '
+    #     marathon90 =  marathon90 + 1
+    # else:
+    #     marathon_detected = ''
+    #
+    #
+    # if product <= 80:
+    #     # print '***                                                   Marathon 90 ***  occured, product total dice = ' + str(total)
+    #     marathon_detected = ' * Marathon detected < 80 '
+    #     marathon90 =  marathon90 + 1
+    # else:
+    #     marathon_detected = ''
+    #
+    # if product <= 70:
+    #     # print '***                                                   Marathon 90 ***  occured, product total dice = ' + str(total)
+    #     marathon_detected = ' * Marathon detected < 70 '
+    #     marathon90 =  marathon90 + 1
+    # else:
+    #     marathon_detected = ''
+
+
 
     print roll_string + ' ( total: ' + str([total]) + '   product:   ' + str([product]) +')' + marathon_detected
 
